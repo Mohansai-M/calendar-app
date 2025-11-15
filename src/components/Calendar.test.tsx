@@ -55,4 +55,76 @@ describe("Calendar Component", () => {
 
     expect(dayCell).toHaveClass("selected");
   });
+  it("lets you navigate dates using arrow keys", () => {
+    render(<Calendar date={testDate} />);
+    const calendar = screen.getByLabelText("Calendar Interface");
+
+    // move right and 12 should be selected
+    fireEvent.keyDown(calendar, { key: "ArrowRight" });
+    expect(screen.getByText("12")).toHaveClass("selected");
+
+    // move left and go back to 11th
+    fireEvent.keyDown(calendar, { key: "ArrowLeft" });
+    expect(screen.getByText("11")).toHaveClass("selected");
+
+    // move up and go  7 days back, should be 4th
+    fireEvent.keyDown(calendar, { key: "ArrowUp" });
+    const selectedUp = screen
+      .getAllByText("4")
+      .find((cell) => cell.classList.contains("selected"));
+    expect(selectedUp).toBeTruthy();
+
+    // move down and go   7 days forward, back to 11th
+    fireEvent.keyDown(calendar, { key: "ArrowDown" });
+    expect(screen.getByText("11")).toHaveClass("selected");
+  });
+
+  it("updates year when user selects a different one", () => {
+    render(<Calendar date={testDate} />);
+    const yearSelect = screen.getByDisplayValue("2025");
+
+    // change year to  2030
+    fireEvent.change(yearSelect, { target: { value: "2030" } });
+    expect(screen.getByDisplayValue("2030")).toBeInTheDocument();
+  });
+
+  it("highlights today's date if it's in the visible month", () => {
+    const today = new Date();
+    render(<Calendar date={today} />);
+
+    // today's date should have the 'today' class
+    const todayCell = screen.getByText(today.getDate().toString());
+    expect(todayCell).toHaveClass("today");
+  });
+
+  it("handles year rollover correctly when navigating months", () => {
+    render(<Calendar date={new Date("2025-12-15")} />);
+
+    // next month shoould be January of next year
+    fireEvent.click(screen.getByText("Next"));
+    expect(screen.getByText("January")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("2026")).toBeInTheDocument();
+
+    // previous month twice should back to November
+    fireEvent.click(screen.getByText("Prev"));
+    fireEvent.click(screen.getByText("Prev"));
+    expect(screen.getByText("November")).toBeInTheDocument();
+  });
+
+  it("renders dates from other months as muted", () => {
+    render(<Calendar date={new Date("2025-01-01")} />);
+
+    // look for '31' which belongs to December 2024
+    const extraDates = screen.getAllByText("31");
+    const isOtherMonth = extraDates.some((cell) =>
+      cell.classList.contains("other-month")
+    );
+    expect(isOtherMonth).toBe(true);
+  });
+
+  it("has correct ARIA label for accessibility", () => {
+    render(<Calendar date={testDate} />);
+    const calendar = screen.getByLabelText("Calendar Interface");
+    expect(calendar).toBeInTheDocument();
+  });
 });
