@@ -31,11 +31,8 @@ npm start
 
 - Proper day-of-week headers
 
- 
-Functional React components with hooks were used for state and memoization.
-
-useCalendar hook calculates the calendar grid efficiently.
-
-CSS modules handle styling, keeping layout clean and responsive.
-
-Focused on separating concerns: CalendarHeader, CalendarInput, and Calendar grid are independent components.
+**Implementation Notes**
+- Functional React components with hooks were used for state and memoization.
+- useCalendar hook calculates the calendar grid efficiently.
+- CSS modules handle styling, keeping layout clean and responsive.
+- Focused on separating concerns: CalendarHeader, CalendarInput, and Calendar grid are independent components.
