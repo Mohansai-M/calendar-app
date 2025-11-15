@@ -1,45 +1,44 @@
 .calendar-container {
     width: fit-content;
-    margin: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.calendar-header {
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: 600;
+    margin: 20px auto;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    outline: none;
 }
 
 .calendar-table {
-    border-collapse: collapse;
+    border-collapse: separate;
     text-align: center;
-    min-width: 280px;
+    min-width: 400px;
+    background: #fff;
+    user-select: none;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    border-spacing: 0;
+    overflow: hidden;
 }
 
-.calendar-table th,
-.calendar-table td {
-    border: 1px solid #ccc;
+
+.calender-days th {
+    background: #f8f8f8;
+    font-weight: 600;
     padding: 8px 0;
-    transition: background-color 0.2s;
-
+    border: 1px solid #ddd;
+    color: #333;
 }
 
-.calendar-table th {
-    background-color: #f0f0f0;
+.calendar-cell {
+    border: 1px solid #e1e1e1;
+    padding: 8px 0;
+    transition: background-color 0.2s ease;
 }
 
 .calendar-cell:hover {
-    background-color: #e0f7fa;
+    background-color: #e9f5ff;
     cursor: pointer;
-    color: #000000;
-}
-
-.calender-days {
-    color: #000000;
 }
 
 .other-month {
-    color: #aaa;
+    color: #9c9c9c;
 }
 
 .today {

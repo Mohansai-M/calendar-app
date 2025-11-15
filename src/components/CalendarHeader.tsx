@@ -6,19 +6,25 @@ type CalendarHeaderProps = {
 };
 
 export default function CalendarHeader({selectedDate, onPrev,  onNext,  onYearChange}: CalendarHeaderProps) {
+  const currentYear = selectedDate.getFullYear();
 
   const years = [];
   for (let i = 1900; i <= 2100; i++) years.push(i);
 
   return (
     <div className="calendar-header">
-      <button onClick={onPrev}>Prev</button>
+      <button className="nav-btn" onClick={onPrev}>
+        Prev
+      </button>
+
       <span className="month-name">
         {selectedDate.toLocaleString("default", { month: "long" })}
       </span>
+
       <select
-        value={selectedDate.getFullYear()}
-        onChange={(e) => onYearChange(parseInt(e.target.value))}
+        className="year-select"
+        value={currentYear}
+        onChange={(e) => onYearChange(parseInt(e.target.value, 10))}
       >
         {years.map((year) => (
           <option key={year} value={year}>
@@ -26,7 +32,10 @@ export default function CalendarHeader({selectedDate, onPrev,  onNext,  onYearCh
           </option>
         ))}
       </select>
-      <button onClick={onNext}>Next</button>
+
+      <button className="nav-btn" onClick={onNext}>
+        Next
+      </button>
     </div>
   );
 }

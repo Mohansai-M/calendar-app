@@ -1,0 +1,38 @@
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+.month-name {
+    font-size: 1rem;
+    color: #333;
+    min-width: 90px;
+    text-align: center;
+}
+
+.year-select {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    height: 30px;
+}
+
+.nav-btn {
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #eaeaea;
+}
