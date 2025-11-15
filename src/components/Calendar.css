@@ -53,3 +53,15 @@
     color: white;
     font-weight: 600;
 }
+
+.selected-date {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+}

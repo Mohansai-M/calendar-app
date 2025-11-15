@@ -1,17 +1,36 @@
-import './CalendarHeader.css'
+import "./CalendarHeader.css";
+
 type CalendarHeaderProps = {
   selectedDate: Date;
   onPrev: () => void;
   onNext: () => void;
   onYearChange: (year: number) => void;
+  onMonthChange: (month: number) => void;
 };
 
-export default function CalendarHeader({selectedDate, onPrev,  onNext,  onYearChange}: CalendarHeaderProps) {
+export default function CalendarHeader({selectedDate, onPrev,  onNext,  onYearChange, onMonthChange}: CalendarHeaderProps) {
   const currentYear = selectedDate.getFullYear();
+  const currentMonth = selectedDate.getMonth();
 
   // Calculationg the year range once
   const years = [];
   for (let i = 1900; i <= 2100; i++) years.push(i);
+
+  // Month options
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <div
@@ -25,9 +44,19 @@ export default function CalendarHeader({selectedDate, onPrev,  onNext,  onYearCh
         Prev
       </button>
 
-      <span className="month-name" aria-live="polite">
-        {selectedDate.toLocaleString("default", { month: "long" })}
-      </span>
+
+      <select
+        className="month-select"
+        value={currentMonth}
+        onChange={(e) => onMonthChange(parseInt(e.target.value, 10))}
+        aria-label="Select month"
+      >
+        {months.map((monthName, index) => (
+          <option key={index} value={index}>
+            {monthName}
+          </option>
+        ))}
+      </select>
 
       <select
         className="year-select"

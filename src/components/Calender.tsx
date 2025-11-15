@@ -35,6 +35,12 @@ export default function Calendar({ date }: CalendarProps) {
     setSelected(newDate);
   };
 
+  const handleMonthChange = (month: number) => {
+    const newDate = new Date(selected);
+    newDate.setMonth(month);
+    setSelected(newDate);
+  };
+
   const handleYearChange = (year: number) => {
     const newDate = new Date(selected);
     newDate.setFullYear(year);
@@ -78,8 +84,10 @@ export default function Calendar({ date }: CalendarProps) {
         onPrev={prevMonth}
         onNext={nextMonth}
         onYearChange={handleYearChange}
+        onMonthChange={handleMonthChange}
       />
-      <table className="calendar-table"
+      <table
+        className="calendar-table"
         role="grid"
         aria-label={`${selected.toLocaleString("default", {
           month: "long",
@@ -114,6 +122,11 @@ export default function Calendar({ date }: CalendarProps) {
           ))}
         </tbody>
       </table>
+      <p className="selected-date">
+        {selected.getDate()} &nbsp;
+        {selected.toLocaleString("default", { month: "long" })}&nbsp;
+        {selected.getFullYear()} is selected
+      </p>
     </div>
   );
 }
