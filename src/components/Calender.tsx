@@ -79,7 +79,12 @@ export default function Calendar({ date }: CalendarProps) {
         onNext={nextMonth}
         onYearChange={handleYearChange}
       />
-      <table className="calendar-table">
+      <table className="calendar-table"
+        role="grid"
+        aria-label={`${selected.toLocaleString("default", {
+          month: "long",
+        })} ${selected.getFullYear()} Calendar`}
+      >
         <thead>
           <tr className="calender-days">
             {WEEKDAYS.map((day, idx) => (
@@ -92,6 +97,8 @@ export default function Calendar({ date }: CalendarProps) {
             <tr key={rowIndex}>
               {week.map((dayObj: CalendarDay, colIndex) => (
                 <td
+                  role="gridcell"
+                  aria-selected={dayObj.isSelected ? "true" : "false"}
                   key={colIndex}
                   className={`calendar-cell
                     ${dayObj.isCurrentMonth ? "" : "other-month"}
