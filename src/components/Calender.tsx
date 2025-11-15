@@ -7,11 +7,14 @@ type CalendarProps = {
 };
 
 export default function Calendar({ date }: CalendarProps) {
+  // Converting and validating the date and chaning it to Date object
   const initialDate = typeof date === "string" ? new Date(date) : date;
   const [selected, setSelected] = useState<Date>(initialDate);
-    useEffect(() => {
-      setSelected(new Date(date));
-    }, [date]);
+
+  // below useeffect is to update the date w.r.t to input field
+  useEffect(() => {
+    setSelected(new Date(date));
+  }, [date]);
 
   const weeks = useCalendar(selected);
   const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -38,33 +41,37 @@ export default function Calendar({ date }: CalendarProps) {
     setSelected(newDate);
   };
 
+  // Keyboard Navigation
+  const handleKeys = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const newDate = new Date(selected);
+
+    switch (e.key) {
+      case "ArrowLeft":
+        newDate.setDate(selected.getDate() - 1);
+        break;
+      case "ArrowRight":
+        newDate.setDate(selected.getDate() + 1);
+        break;
+      case "ArrowUp":
+        newDate.setDate(selected.getDate() - 7);
+        break;
+      case "ArrowDown":
+        newDate.setDate(selected.getDate() + 7);
+        break;
+      default:
+        return;
+    }
+
+    e.preventDefault();
+    setSelected(newDate);
+  };
+
   return (
     <div
       className="calendar-container"
       tabIndex={0}
-      onKeyDown={(e) => {
-        const newDate = new Date(selected);
-        switch (e.key) {
-          case "ArrowLeft":
-            newDate.setDate(selected.getDate() - 1);
-            break;
-          case "ArrowRight":
-            newDate.setDate(selected.getDate() + 1);
-            break;
-          case "ArrowUp":
-            newDate.setDate(selected.getDate() - 7);
-            break;
-          case "ArrowDown":
-            newDate.setDate(selected.getDate() + 7);
-            break;
-          case "Enter":
-            break;
-          default:
-            return;
-        }
-        setSelected(newDate);
-        e.preventDefault();
-      }}
+      onKeyDown={handleKeys}
+      aria-label="Calendar Interface"
     >
       <CalendarHeader
         selectedDate={selected}

@@ -28,7 +28,7 @@
 
 .calendar-cell {
     border: 1px solid #e1e1e1;
-    padding: 8px 0;
+    padding: 8px 5px;
     transition: background-color 0.2s ease;
 }
 

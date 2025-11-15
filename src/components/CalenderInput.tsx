@@ -7,6 +7,7 @@ export default function CalendarInput({
   onSubmit: (date: string) => void;
 }) {
   const [value, setValue] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.target.value.replace(/\D/g, "");
@@ -32,6 +33,7 @@ export default function CalendarInput({
     if (year) formatted += "/" + year;
 
     setValue(formatted);
+    setShowError(false);
   };
 
   const handleSubmit = () => {
@@ -39,24 +41,37 @@ export default function CalendarInput({
     if (d && m && y && y.length === 4) {
       onSubmit(`${y}-${m}-${d}`);
     } else {
-      alert("Enter a valid date");
+      setShowError(true);
     }
   };
 
   return (
     <div className="calendar-input-wrapper">
+      <label htmlFor="date-field" className="sr-only">
+        Enter a date in dd/mm/yyyy format
+      </label>
+
       <input
+        id="date-field"
         className="input-text-calender"
         type="text"
         maxLength={10}
         placeholder="dd/mm/yyyy"
         value={value}
         onChange={handleChange}
+        aria-invalid={showError}
+        aria-describedby={showError ? "date-error" : undefined}
       />
 
       <button className="input-calender-button" onClick={handleSubmit}>
         Submit
       </button>
+
+      {showError && (
+        <p id="date-error" className="error-text" role="alert">
+          Please enter a valid date (dd/mm/yyyy).
+        </p>
+      )}
     </div>
   );
 }

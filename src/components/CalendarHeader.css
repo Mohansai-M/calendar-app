@@ -30,6 +30,7 @@
     background: #f8f8f8;
     border-radius: 8px;
     cursor: pointer;
+    margin-left: 20px;
     transition: background-color 0.2s;
 }
 
