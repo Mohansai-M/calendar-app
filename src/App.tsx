@@ -1,12 +1,17 @@
-import "./App.css";
+import { useState } from "react";
 import Calender from "./components/Calender";
-function App() {
-  const somedate = "2025-01-11";
+import CalendarInput from "./components/CalenderInput";
+
+export default function App() {
+  const [selectedDate, setSelectedDate] = useState("2025-01-11");
+
   return (
     <>
-      <Calender date={somedate} />
+      <CalendarInput
+        onSubmit={(date) => setSelectedDate(date)}
+      />
+
+      <Calender date={selectedDate} />
     </>
   );
 }
-
-export default App;

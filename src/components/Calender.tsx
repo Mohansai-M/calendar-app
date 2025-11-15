@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCalendar, type CalendarDay } from "../hooks/useCalender";
 import "./Calendar.css";
 import CalendarHeader from "./CalendarHeader";
@@ -9,8 +9,12 @@ type CalendarProps = {
 export default function Calendar({ date }: CalendarProps) {
   const initialDate = typeof date === "string" ? new Date(date) : date;
   const [selected, setSelected] = useState<Date>(initialDate);
+    useEffect(() => {
+      setSelected(new Date(date));
+    }, [date]);
 
   const weeks = useCalendar(selected);
+  const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const handleClick = (day: Date) => {
     setSelected(day);
@@ -71,11 +75,9 @@ export default function Calendar({ date }: CalendarProps) {
       <table className="calendar-table">
         <thead>
           <tr className="calender-days">
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
-              (day, idx) => (
-                <th key={idx}>{day}</th>
-              )
-            )}
+            {WEEKDAYS.map((day, idx) => (
+              <th key={idx}>{day}</th>
+            ))}
           </tr>
         </thead>
         <tbody>

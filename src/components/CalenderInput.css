@@ -1,0 +1,39 @@
+.calendar-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 110px auto;
+    width: fit-content;
+}
+
+
+.input-text-calender {
+    width: 140px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.input-text-calender:focus {
+    border-color: #3b82f6;
+
+}
+
+
+.input-calender-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.input-calender-button:hover {
+    background-color: #2563eb;
+}

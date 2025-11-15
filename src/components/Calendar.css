@@ -1,6 +1,6 @@
 .calendar-container {
     width: fit-content;
-    margin: 20px auto;
+    margin: 50px auto;
     font-family: "Inter", "Segoe UI", system-ui, sans-serif;
     outline: none;
 }
